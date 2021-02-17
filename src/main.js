@@ -262,6 +262,11 @@ class Main {
 			this.initParticles();
 			this.createWindows();
 			this.createFooter();
+			// TEMP
+			let tt = new PIXI.Text("Work In Progres...", DEFAULT_STYLE)
+			tt.anchor.set(0.5)
+			tt.position.set(this.width/2, this.height/2)
+			this.stage.addChild(tt)
 			// Finish Loading
 			this.ticker.add(this.update, this);
 			this.resizeEvent();
