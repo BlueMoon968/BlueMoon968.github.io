@@ -78,6 +78,7 @@ class Window extends PIXI.Sprite {
 
 		// Draw Foreground
 		this.frame.lineStyle(4,WHITE);
+		this.frame.drawRect(0,LINE_SIZE + 1, this._ww, 1)
 		this.frame.drawRoundedRect(0,0, this._ww, this._hh, 4);
 		this.frame.drawRoundedRect(this.padding/2,this.padding/2, this._ww - this.padding, this._hh - this.padding, 2);
 		this.addChild(this.frame)
