@@ -220,6 +220,8 @@ class Main {
 		this.stage.addChild(this._windowContainer);
 
 		// Create Windows
+		this._profile = new Window_Profile();
+		this._windowContainer.addChild(this._profile);
 	}
 
 	createFooter() {
