@@ -225,7 +225,7 @@ class Main {
 	}
 
 	createFooter() {
-		this._footer = new PIXI.Text("©Luca Mastroianni - BlueMoon 2021:e.g.", DEFAULT_STYLE);
+		this._footer = new PIXI.Text("©Luca Mastroianni - BlueMoon 2021: e.g.", DEFAULT_STYLE);
 		this._footer.style.fontSize = 16;
 		this._footer.position.set(this.width / 2, this.height - this._footer.height);
 		this._footer.anchor.set(0.5);
@@ -263,7 +263,7 @@ class Main {
 			this.createWindows();
 			this.createFooter();
 			// TEMP
-			let tt = new PIXI.Text("Work In Progres...", DEFAULT_STYLE)
+			let tt = new PIXI.Text("Work In Progress...", DEFAULT_STYLE)
 			tt.anchor.set(0.5)
 			tt.position.set(this.width/2, this.height/2)
 			this.stage.addChild(tt)
