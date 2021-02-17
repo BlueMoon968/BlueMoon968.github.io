@@ -117,17 +117,10 @@ class Window extends PIXI.Sprite {
 // COMMAND WINDOW
 //=============================================================================
 
-class Command_Window extends Window {
+class Profile_Window extends Window {
 
 	refresh() {
 		super.refresh();
-		this.createCursor();
-		this._cursor.tileMove(1,2);
-
-		this.drawText("Stats", this.lineSize*2 + this.textPadding, this.lineSize*2 + this.textPadding)
-		this.drawText("Inventory", this.lineSize*2 + this.textPadding, this.lineSize*4 + this.textPadding)
-		this.drawText("Coding", this.lineSize*2 + this.textPadding, this.lineSize*6 + this.textPadding)
-		this.drawText("News", this.lineSize*2 + this.textPadding, this.lineSize*8 + this.textPadding)
 	}
 
 }
@@ -221,17 +214,11 @@ class Main {
 		}
 	}
 
-	initCommandWindow() {
-		this._commandWindow = new Command_Window(Math.floor(this.width/12), Math.floor(this.height/4),Math.floor(this.width / 5), Math.floor(this.height/3.1))
-		this._windowContainer.addChild(this._commandWindow);
-	}
-
 	createWindows() {
 		this._windowContainer = new PIXI.Container();
 		this.stage.addChild(this._windowContainer);
 
 		// Create Windows
-		this.initCommandWindow();
 	}
 
 	createFooter() {
