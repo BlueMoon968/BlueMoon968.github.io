@@ -220,7 +220,7 @@ class Main {
 		this.stage.addChild(this._windowContainer);
 
 		// Create Windows
-		this._profile = new Window_Profile(100,100,200,200);
+		this._profile = new Profile_Window(100,100,200,200);
 		this._windowContainer.addChild(this._profile);
 	}
 
