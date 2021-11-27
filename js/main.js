@@ -29,7 +29,7 @@
         static LOCAL_STORAGE_KEY = "NebulaGames_Language"
 
         static init(callback) {
-            this.locale = localStorage.getItem(Language.LOCAL_STORAGE_KEY) || "it";
+            this.locale = localStorage.getItem(Language.LOCAL_STORAGE_KEY) || "en";
             this._events = {};
             this.preload(callback);
             
