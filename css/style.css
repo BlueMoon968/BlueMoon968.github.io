@@ -1,3 +1,12 @@
+@font-face {
+    font-family: 'Oswald';
+    src: url('../assets/Oswald-Regular.woff2') format('woff2'),
+        url('../assets/Oswald-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 body {
     overflow: hidden;
     margin: 0;
