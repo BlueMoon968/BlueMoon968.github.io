@@ -87,7 +87,7 @@ function _startSearch() {
 	let getOptions = {
 		method: "get",
 		headers: {
-			"x-rapidapi-key": "acb0685aadmsh32b6b63033a2858p10788ajsn45c8b0510103",
+			"x-rapidapi-key": atob('YWNiMDY4NWFhZG1zaDMyYjZiNjMwMzNhMjg1OHAxMDc4OGFqc240NWM4YjA1MTAxMDM='),
 			"x-rapidapi-host": "jikan1.p.rapidapi.com"
 		}
 	}
