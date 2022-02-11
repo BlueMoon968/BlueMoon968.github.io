@@ -6,5 +6,13 @@
     "wip": {
         "en": "Work In Progress",
         "it": "Lavori In Corso"
-    }
+    },
+    "disclaimer": {
+        "en": "© 2018 - 2022 NEBULA GAMES\nAll Rights Reserved.",
+        "it": "© 2018 - 2022 NEBULA GAMES\nTutti Diritti Riservati."       
+    },
+    "header": {"en": "NEBULA GAMES", "it": "NEBULA GAMES"},
+    "home": {"en": "HOME", "it": "HOME"},
+    "projects": {"en": "PROJECTS", "it": "PROGETTI"},
+    "about": {"en": "ABOUT", "it": "ABOUT"}
 }
