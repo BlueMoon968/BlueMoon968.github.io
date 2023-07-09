@@ -63,7 +63,7 @@
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
-
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"> </script>
 	</head>
 	<body>
 		
@@ -520,27 +520,34 @@
 		<div class="container">
 			<div class="row animate-box">
 				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<h2>Are You Attending?</h2>
-					<p>Please Fill-up the form to notify you that you're attending. Thanks.</p>
+					<h2>Parteciperai al matrimonio?</h2>
+					<p>Puoi comunicarcelo compilando questo form. Grazie.</p>
+					<p>Oltre al tuo nome e cognome, in "Partecipanti" puoi inserire i nomi e cognomi di altri invitati che confermano la presenza.</p>
 				</div>
 			</div>
 			<div class="row animate-box">
 				<div class="col-md-10 col-md-offset-1">
-					<form class="form-inline">
-						<div class="col-md-4 col-sm-4">
+					<form class="form-inline" id="confirmForm">
+						<div class="col-md-3 col-sm-6">
 							<div class="form-group">
-								<label for="name" class="sr-only">Name</label>
-								<input type="name" class="form-control" id="name" placeholder="Name">
+								<label for="name" class="sr-only">Nome e Cognome</label>
+								<input type="name" class="form-control" id="name" placeholder="Nome e Cognome" required>
 							</div>
 						</div>
-						<div class="col-md-4 col-sm-4">
+						<div class="col-md-3 col-sm-6">
+							<div class="form-group">
+								<label for="name" class="sr-only">Partecipanti</label>
+								<input type="name" class="form-control" id="others" placeholder="Partecipanti" required>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-6">
 							<div class="form-group">
 								<label for="email" class="sr-only">Email</label>
-								<input type="email" class="form-control" id="email" placeholder="Email">
+								<input type="email" class="form-control" id="email" placeholder="Email" required>
 							</div>
 						</div>
-						<div class="col-md-4 col-sm-4">
-							<button type="submit" class="btn btn-default btn-block">I am Attending</button>
+						<div class="col-md-3 col-sm-6">
+							<button type="submit" class="btn btn-default btn-block">Parteciperò</button>
 						</div>
 					</form>
 				</div>
@@ -622,6 +629,30 @@
     window.onbeforeunload = function() {
         window.scrollTo(0, 0);
     };
+
+	emailjs.init("LtJga8zLDqDRe_jiF")
+
+	let confirmForm = document.getElementById("confirmForm")
+	confirmForm.addEventListener("submit", (e) => {
+		e.preventDefault()
+
+		let name = document.getElementById("name")
+		let others = document.getElementById("others")
+		let email = document.getElementById("email")
+
+		emailjs.send("service_5fruqkl","template_dolegfc",{
+			to_name: name.value,
+			message: `${name.value} - ${others.value}`,
+			reply_to: email.value,
+		}).then(r => {
+			alert("Grazie per la tua partecipazione! Riceverai una mail di conferma.")
+			name.value = ""
+			others.value = ""
+			email.value = ""
+		}, e => {
+			alert("Qualcosa è andato storto! Controlla i dati inseriti o prova a ricaricare la pagina.")
+		})
+	})
 
 </script>
 
