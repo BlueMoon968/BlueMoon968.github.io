@@ -56,6 +56,8 @@
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/rpg-awesome.min.css">
+	<link rel="stylesheet" href="css/virtual-select.min.css" />
+	
 
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
@@ -64,6 +66,7 @@
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"> </script>
+	<script src="js/virtual-select.min.js"></script>
 	</head>
 	<body>
 		
@@ -453,25 +456,114 @@
 			<div class="row animate-box">
 				<div class="col-md-10 col-md-offset-1">
 					<form class="form-inline" id="confirmForm">
-						<div class="col-md-3 col-sm-6">
+						<div class="col-md-4 col-sm-4">
 							<div class="form-group">
-								<label for="name" class="sr-only">Nome e Cognome</label>
-								<input type="name" class="form-control" id="name" placeholder="Nome e Cognome" required>
+								<label for="partecipanti" class="sr-only">Partecipanti</label>
+								<select multiple name="partecipanti" id="pers" placeholder="Seleziona i partecipanti..." data-search="true" data-silent-initial-value-set="true" required>
+									<option>Maria Silvestro</option>
+									<option>Giuseppe Liberti</option>
+									<option>Antonio Liberti</option>
+									<option>Agostina De Crescenzo</option>
+									<option>Alice Liberti</option>
+									<option>Elisa Liberti</option>
+									<option>Nicola Fiorillo</option>
+									<option>Wanda Liberti</option>
+									<option>Lorenzo Fiorillo</option>
+									<option>Noemi Fiorillo</option>
+									<option>Alfonso Quinti</option>
+									<option>Cinzia Mastroianni</option>
+									<option>Clelia Pentoniero</option>
+									<option>Sabrina Pentoniero</option>
+									<option>Daniele Iacullo</option>
+									<option>Marco (Clelia)</option>
+									<option>Gaetano Giglio</option>
+									<option>Teresa (Gaetano)</option>
+									<option>Andrea Di Mauro</option>
+									<option>Remigio Truocchio</option>
+									<option>Angela Velardi</option>
+									<option>Emilio Truocchio</option>
+									<option>Angelina Soulas</option>
+									<option>Agata Valentino</option>
+									<option>Simone Valentino</option>
+									<option>Generoso Valentino</option>
+									<option>Signora Valentino</option>
+									<option>Brigida Troisi</option>
+									<option>Gaetano Vitale</option>
+									<option>Valentina Vitale</option>
+									<option>Roberta Vitale</option>
+									<option>Tyson Huud</option>
+									<option>Ismaele Huud</option>
+									<option>Anna Troisi</option>
+									<option>Michele Rubino</option>
+									<option>Giulia Rubino</option>
+									<option>Gianpiero (Giulia)</option>
+									<option>Danilo Rubino</option>
+									<option>Lucero (Danilo)</option>
+									<option>Gabriele Troisi</option>
+									<option>Federica Toisi</option>
+									<option>Anna Maria (Zia di Laura)</option>
+									<option>Francesca Troisi</option>
+									<option>Laura (Francesca)</option>
+									<option>Ivana Troisi</option>
+									<option>Nicoletta Troisi</option>
+									<option>Gino (Nicoletta)</option>
+									<option>Errico (Nicoletta)</option>
+									<option>Gemma (Nicoletta)</option>
+									<option>Michela Tartaglione</option>
+									<option>Davide De Caro</option>
+									<option>Marco De Caro</option>
+									<option>Raffaella (Marco)</option>
+									<option>Ginevra De Caro</option>
+									<option>Rosy De Caro</option>
+									<option>Mario Cacciapuoti</option>
+									<option>Alessandra Tartaglione</option>
+									<option>Anna Tartaglione</option>
+									<option>Salvatore De Cicco</option>
+									<option>Rossella De Cicco</option>
+									<option>Emanuele De Cicco</option>
+									<option>Antonia Sposito</option>
+									<option>Zio Tonino</option>
+									<option>Zia Gabriella</option>
+									<option>Giuseppe (Zio Tonino)</option>
+									<option>Zia Bianchina</option>
+									<option>Anna Saccone</option>
+									<option>Armando Toscano</option>
+									<option>Emanuela Avizzano</option>
+									<option>Raffaele Lettieri</option>
+									<option>Simona Mingione</option>
+									<option>Tommaso Conversano</option>
+									<option>Gianluca Ventorino</option>
+									<option>Federica D'Amico</option>
+									<option>Silvio Radicci</option>
+									<option>Carmine Marco Santangelo</option>
+									<option>Valeria Izzo</option>
+									<option>Rebecca Ferone</option>
+									<option>Martina Varone</option>
+									<option>Merilisa Battiloro</option>
+									<option>Pasquale (Merilisa)</option>
+									<option>Beniamino Piciullo</option>
+									<option>Sebastiano Corriere</option>
+									<option>Ivano Nasti</option>
+									<option>Maria (Ivano)</option>
+									<option>Anna Chiara Finelli</option>
+									<option>Andrea (Anna Chiara)</option>
+									<option>Emanuele Califano</option>
+									<option>Marianna Nappi</option>
+									<option>Michele Frongia</option>
+									<option>Mauro Simonetti</option>
+									<option>Alessia Tizzano</option>
+									
+								  </select>
+								<!--<input type="name" class="form-control" id="name" placeholder="Nome e Cognome" required>-->
 							</div>
 						</div>
-						<div class="col-md-3 col-sm-6">
-							<div class="form-group">
-								<label for="name" class="sr-only">Partecipanti</label>
-								<input type="name" class="form-control" id="others" placeholder="Partecipanti" required>
-							</div>
-						</div>
-						<div class="col-md-3 col-sm-6">
+						<div class="col-md-4 col-sm-4">
 							<div class="form-group">
 								<label for="email" class="sr-only">Email</label>
 								<input type="email" class="form-control" id="email" placeholder="Email" required>
 							</div>
 						</div>
-						<div class="col-md-3 col-sm-6">
+						<div class="col-md-4 col-sm-6">
 							<button type="submit" class="btn btn-default btn-block">Parteciperò</button>
 						</div>
 					</form>
@@ -557,27 +649,56 @@
 
 	emailjs.init("LtJga8zLDqDRe_jiF")
 
+	VirtualSelect.init({ 
+		ele: 'select' ,
+		noOptionsText: "Nominativo non trovato",
+		noSearchResultsText: "Nominativo non trovato",
+		selectAllText: "Seleziona tutti",
+		searchPlaceholderText: "Cerca...",
+		allOptionsSelectedText: "Tutti - (non credo tu possa confermare per tutti... ma, ok)",
+		showSelectedOptionsFirst: true
+
+
+	});
+
 	let confirmForm = document.getElementById("confirmForm")
 	confirmForm.addEventListener("submit", (e) => {
 		e.preventDefault()
-
-		let name = document.getElementById("name")
-		let others = document.getElementById("others")
+		let pers = document.getElementById("pers")
+		let people = pers.getSelectedOptions().map(el=>el.value)
 		let email = document.getElementById("email")
 
 		emailjs.send("service_5fruqkl","template_dolegfc",{
-			to_name: name.value,
-			message: `${name.value} - ${others.value}`,
+			to_name: people[0],
+			message: `${people.join(",\n")}`,
 			reply_to: email.value,
 		}).then(r => {
 			alert("Grazie per la tua partecipazione! Riceverai una mail di conferma.")
-			name.value = ""
-			others.value = ""
+			pers.toggleSelectAll(false)
 			email.value = ""
 		}, e => {
 			alert("Qualcosa è andato storto! Controlla i dati inseriti o prova a ricaricare la pagina.")
 		})
 	})
+	
+	// Edit library style
+	let toggleS = document.getElementsByClassName("vscomp-toggle-button")[0].style
+	toggleS.background = "rgba(255,255,255,0.2)"
+	toggleS.borderColor = "rgba(0,0,0,0)"
+	toggleS.width = "100%"
+	toggleS.border = "none"
+	toggleS.color = "#fff"
+	toggleS.fontSize = "14px"
+	toggleS.transition = "0.5s"
+	toggleS.display = "inline-block"
+	toggleS.verticalAlign = "middle"
+	toggleS.boxShadow = "none"
+	toggleS.height = "54px"
+	toggleS.fontWeight = "300"
+	toggleS.padding = "10px 20px"
+	toggleS.lineHeight = "1.42857"
+	toggleS.borderRadius = "4px"
+	toggleS.fontFamily = `"Helvetica Neue", Helvetica, Arial, sans-serif`
 
 </script>
 
