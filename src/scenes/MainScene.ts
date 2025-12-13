@@ -8,18 +8,17 @@ export class MainScene {
   private container: Container;
   private cartridges: Cartridge[] = [];
   private shelf: Graphics;
+  private isReady = false;
   
   constructor(parentElement: HTMLElement) {
-    // Create PixiJS app
     this.app = new Application();
     this.container = new Container();
-    
     this.shelf = new Graphics();
     
-    this.init(parentElement);
+    this.initialize(parentElement);
   }
 
-  private async init(parentElement: HTMLElement) {
+  private async initialize(parentElement: HTMLElement) {
     await this.app.init({
       width: window.innerWidth,
       height: window.innerHeight,
@@ -31,8 +30,8 @@ export class MainScene {
 
     parentElement.appendChild(this.app.canvas);
     this.app.stage.addChild(this.container);
-
     this.drawShelf();
+    this.isReady = true;
     
     window.addEventListener('resize', () => this.resize());
   }

@@ -21,26 +21,29 @@ class App {
   }
 
   private async init() {
-    // Set initial theme
     setTheme(getInitialTheme());
 
-    // Load projects
+    // Aspetta che la scena sia pronta
+    await new Promise(resolve => {
+      const check = setInterval(() => {
+        if ((this.scene as any).isReady) {
+          clearInterval(check);
+          resolve(null);
+        }
+      }, 10);
+    });
+
     this.projects = await loadProjects();
     
-    // Add projects to scene
     this.scene.addProjects(this.projects, (project) => {
       this.modal.open(project);
     });
 
-    // Start animation loop
     this.scene.startAnimationLoop();
 
-    // Setup UI
     this.setupThemeToggle();
     this.setupFilters();
     this.setupEasterEggs();
-
-    // Konami code easter egg
     this.setupKonamiCode();
   }
 
