@@ -1,34 +1,44 @@
 <!DOCTYPE html>
-<html lang="">
-    <head>
-        <meta charset="utf-8" />
-        <title>Nebula Games</title>   
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Creative and Creators for art, games and culture." />
-        <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-        <META HTTP-EQUIV="Expires" CONTENT="-1">
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blue Moon - Indie Game Developer</title>
+  <meta name="description" content="Portfolio of Blue Moon - Indie Game Developer & Coder">
+</head>
+<body>
+  <!-- Header with theme toggle -->
+  <header class="header">
+    <div class="header-content">
+      <h1 class="glitch-text" data-text="BLUE MOON">BLUE MOON</h1>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="sun">☀️</span>
+        <span class="moon">🌙</span>
+      </button>
+    </div>
+  </header>
 
-        <!-- Open Graph / Facebook -->
-        <meta property="og:type" content="website">
-        <meta property="og:url" content="https://nebula-games.com">
-        <meta property="og:title" content="Nebula Games">
-        <meta property="og:description" content="Creative and Creators for art, games and culture.">
-        <meta property="og:image" content="https://nebula-games.com">
-        
-        <!-- Twitter -->
-        <meta property="twitter:card" content="summary_large_image">
-        <meta property="twitter:url" content="https://nebula-games.com">
-        <meta property="twitter:title" content="Nebula Games">
-        <meta property="twitter:description" content="Creative and Creators for art, games and culture.">
-        <meta property="twitter:image" content="https://nebula-games.com">
+  <!-- Filters -->
+  <nav class="filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="games">Games</button>
+    <button class="filter-btn" data-filter="coding">Coding</button>
+  </nav>
 
-        <!-- Scripts! -->
-        <link rel="preload" as="font" href="/assets/Oswald-Regular.woff" type="font/woff" crossorigin="anonymous">
-        <link rel="preload" as="font" href="/assets/Oswald-Regular.woff2" type="font/woff2" crossorigin="anonymous">
-        <link rel="stylesheet" href="./css/style.css">
-        <script src="https://pixijs.download/release/pixi.js"></script>
-        <script src="./js/main.js" defer></script>
-    </head>
-    <body></body>
+  <!-- PixiJS Canvas Container -->
+  <div id="pixiContainer"></div>
+
+  <!-- Project Detail Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose">&times;</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- Easter Egg Character -->
+  <div id="easterEggChar" class="easter-egg-char"></div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
 </html>
