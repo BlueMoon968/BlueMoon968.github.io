@@ -36,89 +36,85 @@ export class Cartridge {
     const height = width * 1.4;
     const isGame = this.project.frontmatter.type === 'game';
     
-    // Color scheme based on type - Vaporwave palette
-    const colors = {
-      game: {
-        primary: 0xff6ec7,   // Hot pink
-        secondary: 0x7b68ee, // Medium purple
-        accent: 0x00d4ff     // Cyan
-      },
-      coding: {
-        primary: 0x7b68ee,   // Medium purple
-        secondary: 0x00d4ff, // Cyan
-        accent: 0xff6ec7     // Hot pink
-      }
-    };
-
-    const palette = isGame ? colors.game : colors.coding;
-
-    // Cartridge body
-    this.body.roundRect(0, 0, width, height, 8);
-    this.body.fill({ color: palette.primary });
-
-    // Top notch
-    const notchWidth = width * 0.6;
-    const notchHeight = height * 0.15;
-    this.body.roundRect(width * 0.2, -notchHeight * 0.5, notchWidth, notchHeight, 4);
-    this.body.fill({ color: palette.secondary });
-
-    // Label area
+    // Colori stile GB
+    const cartColor = isGame ? 0x7b68ee : 0xff6ec7; // Viola per games, rosa per coding
+    
+    // Corpo principale cartuccia
+    this.body.roundRect(0, 0, width, height, 6);
+    this.body.fill({ color: cartColor });
+    
+    // Tacca superiore
+    const notchW = width * 0.6;
+    const notchH = height * 0.1;
+    this.body.roundRect(width * 0.2, -notchH * 0.4, notchW, notchH, 3);
+    this.body.fill({ color: cartColor });
+    
+    // Linee decorative in alto
+    this.body.rect(width * 0.15, 10, width * 0.7, 2);
+    this.body.fill({ color: 0x000000, alpha: 0.15 });
+    this.body.rect(width * 0.15, 14, width * 0.7, 2);
+    this.body.fill({ color: 0x000000, alpha: 0.15 });
+    
+    // Label bianca centrale
     const labelY = height * 0.3;
-    const labelHeight = height * 0.4;
-    this.body.roundRect(width * 0.1, labelY, width * 0.8, labelHeight, 4);
-    this.body.fill({ color: 0x0a0a1f, alpha: 0.8 });
-
-    // Accent line
-    this.body.rect(width * 0.1, labelY + labelHeight + 5, width * 0.8, 3);
-    this.body.fill({ color: palette.accent });
-
+    const labelH = height * 0.45;
+    this.body.roundRect(width * 0.12, labelY, width * 0.76, labelH, 4);
+    this.body.fill({ color: 0xffffff });
+    
+    // Bordo interno label
+    this.body.roundRect(width * 0.15, labelY + 3, width * 0.7, labelH - 6, 3);
+    this.body.stroke({ color: 0xe0e0e0, width: 1 });
+    
     this.sprite.addChild(this.body);
-
-    // Label text
-    const labelStyle = new TextStyle({
-      fontFamily: 'monospace',
-      fontSize: width * 0.12,
-      fill: 0xffffff,
+    
+    // Testo titolo
+    const titleStyle = new TextStyle({
+      fontFamily: 'Courier New, monospace',
+      fontSize: width * 0.10,
+      fill: 0x333333,
       align: 'center',
+      fontWeight: 'bold',
       wordWrap: true,
-      wordWrapWidth: width * 0.7
+      wordWrapWidth: width * 0.65
     });
-
+    
     this.label.text = this.project.frontmatter.title.toUpperCase();
-    this.label.style = labelStyle;
+    this.label.style = titleStyle;
     this.label.anchor.set(0.5);
     this.label.x = width / 2;
-    this.label.y = labelY + (labelHeight / 2);
-
+    this.label.y = labelY + (labelH / 2);
     this.sprite.addChild(this.label);
-
-    // Type badge
+    
+    // Badge tipo sotto
     const badgeStyle = new TextStyle({
-      fontFamily: 'monospace',
-      fontSize: width * 0.08,
-      fill: palette.accent,
+      fontFamily: 'Courier New, monospace',
+      fontSize: width * 0.09,
+      fill: 0xffffff,
       fontWeight: 'bold'
     });
-
+    
     const badge = new Text({ 
-      text: isGame ? '🎮' : '💻',
+      text: isGame ? 'GAME' : 'CODE',
       style: badgeStyle 
     });
     badge.anchor.set(0.5);
     badge.x = width / 2;
     badge.y = height * 0.85;
     this.sprite.addChild(badge);
-
-    // Make interactive
+    
+    // Interattività
     this.sprite.eventMode = 'static';
     this.sprite.cursor = 'pointer';
-
-    this.sprite.on('pointerover', (e: FederatedPointerEvent) => this.onHover(e));
-    this.sprite.on('pointerout', (e: FederatedPointerEvent) => this.onHoverOut(e));
+    this.sprite.on('pointerover', (e) => this.onHover(e));
+    this.sprite.on('pointerout', (e) => this.onHoverOut(e));
   }
 
   private onHover(_e: FederatedPointerEvent) {
     if (this.isHovered) return;
+
+    const modal = document.querySelector('.modal.active');
+    if (modal) return;
+
     this.isHovered = true;
     soundManager.hover();
 

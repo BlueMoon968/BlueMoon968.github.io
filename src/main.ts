@@ -41,26 +41,9 @@ class App {
 
     this.scene.startAnimationLoop();
 
-    this.setupThemeToggle();
     this.setupFilters();
     this.setupEasterEggs();
     this.setupKonamiCode();
-  }
-
-  private setupThemeToggle() {
-    const toggle = document.getElementById('themeToggle');
-    if (!toggle) return;
-
-    toggle.addEventListener('click', () => {
-      toggleTheme();
-      soundManager.click();
-      
-      // Fun animation on theme change
-      gsap.fromTo(document.body, 
-        { filter: 'brightness(0)' },
-        { filter: 'brightness(1)', duration: 0.5, ease: 'power2.out' }
-      );
-    });
   }
 
   private setupFilters() {

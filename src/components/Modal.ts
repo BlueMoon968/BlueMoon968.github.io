@@ -6,6 +6,7 @@ export class Modal {
   private modal: HTMLElement;
   private modalBody: HTMLElement;
   private closeBtn: HTMLElement;
+  public isOpen = false;
 
   constructor() {
     this.modal = document.getElementById('modal')!;
@@ -35,6 +36,7 @@ export class Modal {
   }
 
   public open(project: Project) {
+    this.isOpen = true
     soundManager.select();
     
     // Render content
@@ -62,6 +64,7 @@ export class Modal {
       onComplete: () => {
         this.modal.classList.remove('active');
         document.body.style.overflow = '';
+        this.isOpen = false;
       }
     });
   }
