@@ -2,7 +2,7 @@ import './styles/main.scss';
 import { MainScene } from './scenes/MainScene';
 import { Modal } from './components/Modal';
 import { loadProjects, filterProjects } from './utils/projectLoader';
-import { getInitialTheme, setTheme, toggleTheme } from './utils/theme';
+import { getInitialTheme, setTheme } from './utils/theme';
 import { soundManager } from './utils/sound';
 import type { Project, FilterType } from './types';
 import gsap from 'gsap';
