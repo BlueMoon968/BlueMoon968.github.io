@@ -23,15 +23,9 @@ class App {
   private async init() {
     setTheme(getInitialTheme());
 
-    // Aspetta che la scena sia pronta
-    await new Promise(resolve => {
-      const check = setInterval(() => {
-        if ((this.scene as any).isReady) {
-          clearInterval(check);
-          resolve(null);
-        }
-      }, 10);
-    });
+    while (!this.scene.isReady) {
+      await new Promise(resolve => setTimeout(resolve, 10));
+    }
 
     this.projects = await loadProjects();
     
@@ -39,11 +33,12 @@ class App {
       this.modal.open(project);
     });
 
-    this.scene.startAnimationLoop();
-
     this.setupFilters();
     this.setupEasterEggs();
     this.setupKonamiCode();
+    
+    // SPOSTA QUI, dopo che tutto è pronto
+    this.scene.startAnimationLoop();
   }
 
   private setupFilters() {
