@@ -40,32 +40,31 @@ export class MainScene {
     window.addEventListener('resize', () => this.resize());
   }
 
-private drawShelf() {
-  const { width, height } = this.app.screen;
-  
-  this.shelf.clear();
-  
-  // Background
-  this.shelf.rect(0, 0, width, height);
-  this.shelf.fill({ color: 0x0a0a1f });
-
-  // Shelf planks
-  const shelfY = height * 0.3;
-  const shelfHeight = 8;
-  
-  for (let i = 0; i < 3; i++) {
-    const y = shelfY + (i * height * 0.25);
+  private drawShelf() {
+    const { width, height } = this.app.screen;
     
-    this.shelf.rect(0, y + shelfHeight, width, 4);
-    this.shelf.fill({ color: 0x050510, alpha: 0.5 });
+    this.shelf.clear();
     
-    this.shelf.rect(0, y, width, shelfHeight);
-    this.shelf.fill({ color: 0x1a1a3e });
+    // NON disegnare il background completo, solo le mensole
+    const shelfY = height * 0.3;
+    const shelfHeight = 8;
     
-    this.shelf.rect(0, y, width, 2);
-    this.shelf.fill({ color: 0x2a2a4e });
+    for (let i = 0; i < 3; i++) {
+      const y = shelfY + (i * height * 0.25);
+      
+      // Shelf shadow
+      this.shelf.rect(0, y + shelfHeight, width, 4);
+      this.shelf.fill({ color: 0x050510, alpha: 0.5 });
+      
+      // Shelf plank
+      this.shelf.rect(0, y, width, shelfHeight);
+      this.shelf.fill({ color: 0x1a1a3e });
+      
+      // Shelf highlight
+      this.shelf.rect(0, y, width, 2);
+      this.shelf.fill({ color: 0x2a2a4e });
+    }
   }
-}
 
   public addProjects(projects: Project[], onCartridgeClick: (project: Project) => void) {
     console.log(this.app)
