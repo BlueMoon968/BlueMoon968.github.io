@@ -20,7 +20,7 @@ function parseFrontmatter(markdown: string) {
     
     // Parse array
     if (value.startsWith('[')) {
-      value = value.slice(1, -1).split(',').map(v => v.trim().replace(/['"]/g, ''));
+      value = value.slice(1, -1).split(',').map((v: string) => v.trim().replace(/['"]/g, ''));
     }
     // Parse object
     else if (key === 'links') {

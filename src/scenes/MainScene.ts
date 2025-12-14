@@ -8,7 +8,7 @@ export class MainScene {
   private container: Container;
   private cartridges: Cartridge[] = [];
   private shelf: Graphics;
-  private isReady = false;
+  public isReady = false;
   
   constructor(parentElement: HTMLElement) {
     this.app = new Application();
