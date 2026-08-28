@@ -1,15 +1,345 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bluemoon · Pause Menu</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Pixelify+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
 </head>
-<body data-palette="pastel">
-  <div id="root"></div>
-  <script type="module" src="/src/main.tsx"></script>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin:0; padding:0; background:#04102b; }
+  * { box-sizing: border-box; }
+  a { color:#c9d2e9; text-decoration:none; }
+  a:hover { color:#fffeff; }
+  @keyframes blink { 0%,49%{opacity:1} 50%,100%{opacity:0} }
+  @keyframes bob { 0%,100%{transform:translateX(0)} 50%{transform:translateX(3px)} }
+  ::selection { background:#ae0002; color:#fffeff; }
+</style>
+</helmet>
+<div style="min-height:100vh;background:#04102b;background-image:repeating-linear-gradient(180deg,rgba(255,255,255,0.035) 0 1px,transparent 1px 3px);font-family:Silkscreen,monospace;color:#c9d2e9;padding:32px 20px 56px;display:flex;justify-content:center;image-rendering:pixelated">
+  <div style="width:100%;max-width:1080px">
+
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:18px">
+      <div>
+        <div style="font-family:'Press Start 2P',monospace;font-size:30px;line-height:1.25;color:#fffeff;text-shadow:3px 3px 0 #002566">bluemoon<span style="color:#6580ab">.moe</span></div>
+        <div style="margin-top:10px;font-size:15px;letter-spacing:1px;color:#6580ab">{{ t.tagline }}</div>
+      </div>
+      <div style="display:flex;gap:0;border:2px solid #6580ab;background:#002566">
+        <button onClick="{{ setEn }}" style="{{ enBtnStyle }}" style-hover="{{ langHover }}">EN</button>
+        <button onClick="{{ setIt }}" style="{{ itBtnStyle }}" style-hover="{{ langHover }}">IT</button>
+      </div>
+    </div>
+
+    <div style="border:3px solid #6580ab;background:#002566;padding:10px 12px;display:flex;align-items:center;gap:10px;font-size:14px;min-height:52px;box-shadow:6px 6px 0 rgba(0,0,0,0.35)">
+      <span style="color:#ae0002;font-size:13px">&#9654;</span>
+      <span style="color:#fffeff;line-height:1.5">{{ helpText }}</span>
+    </div>
+
+    <div style="display:grid;grid-template-columns:272px 1fr;gap:16px;margin-top:16px;align-items:start">
+
+      <div style="display:grid;gap:16px">
+        <div style="border:3px solid #6580ab;background:#002566;padding:14px;box-shadow:6px 6px 0 rgba(0,0,0,0.35)">
+          <div style="border:2px solid #6580ab;background:#0a2557;height:216px;overflow:hidden;display:flex;align-items:flex-start;justify-content:center">
+            <img src="portrait.png" alt="Luca Mastroianni pixel portrait" style="width:100%;display:block;image-rendering:pixelated" />
+          </div>
+          <div style="margin-top:12px;display:flex;justify-content:space-between;align-items:baseline;gap:8px">
+            <span style="color:#fffeff;font-size:17px">Luca</span>
+            <span style="color:#ae0002;font-size:15px">Lv.{{ level }}</span>
+          </div>
+          <div style="color:#6580ab;font-size:14px;margin-top:2px">Mastroianni</div>
+          <div style="margin-top:10px;border-top:2px solid #6580ab;padding-top:10px;display:grid;gap:6px;font-size:13px">
+            <div style="display:flex;justify-content:space-between;gap:12px"><span style="color:#6580ab;flex:none">{{ t.classLabel }}</span><span style="color:#fffeff;text-align:right">{{ t.className }}</span></div>
+            <div style="display:flex;justify-content:space-between;gap:12px"><span style="color:#6580ab;flex:none">{{ t.jobLabel }}</span><span style="color:#fffeff;text-align:right">{{ t.jobName }}</span></div>
+          </div>
+        </div>
+
+        <div style="border:3px solid #6580ab;background:#002566;padding:8px;box-shadow:6px 6px 0 rgba(0,0,0,0.35)">
+          <sc-for list="{{ menu }}" as="item" hint-placeholder-count="4">
+            <div onClick="{{ item.onClick }}" style="cursor:pointer;display:flex;align-items:center;gap:10px;padding:11px 10px;font-size:16px;border:2px solid transparent;background:{{ item.bg }};color:{{ item.fg }};border-color:{{ item.border }}">
+              <span style="width:12px;display:inline-block;color:#ae0002;animation:bob 0.6s steps(2,end) infinite;opacity:{{ item.arrow }}">&#9654;</span>
+              <span>{{ item.label }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="border:3px solid #6580ab;background:#002566;box-shadow:6px 6px 0 rgba(0,0,0,0.35);min-height:520px">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:3px solid #6580ab;padding:12px 16px;background:#001c4f">
+          <span style="font-family:'Press Start 2P',monospace;font-size:14px;color:#fffeff">{{ panelTitle }}</span>
+          <span style="font-size:13px;color:#6580ab">{{ panelMeta }}</span>
+        </div>
+        <div style="padding:20px">
+
+          <sc-if value="{{ isBio }}" hint-placeholder-val="{{ true }}">
+            <div style="display:grid;gap:20px">
+              <div style="display:grid;gap:14px;font-size:15px;line-height:1.85;color:#fffeff;text-wrap:pretty">
+                <p style="margin:0">{{ t.bio1a }}<span style="color:#ae0002">Bluemoon</span>{{ t.bio1b }}<span style="color:#ae0002">Sparrow Tales</span>{{ t.bio1c }}</p>
+                <p style="margin:0">{{ t.bio2a }}<span style="color:#ae0002">{{ t.bio2b }}</span>{{ t.bio2c }}</p>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px">
+                <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+                  <div style="border:2px solid #6580ab;padding:11px 12px;background:#001c4f">
+                    <div style="display:flex;justify-content:space-between;gap:10px;font-size:13px"><span style="color:#c9d2e9">{{ s.label }}</span><span style="color:#fffeff;flex:none">{{ s.value }}</span></div>
+                    <div style="font-size:11px;color:#6580ab;margin:7px 0 8px;line-height:1.5">{{ s.note }}</div>
+                    <div style="height:10px;background:#04102b;border:2px solid #6580ab;padding:1px"><div style="height:100%;background:#ae0002;width:{{ s.pct }}"></div></div>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="border:2px solid #6580ab;background:#001c4f;padding:14px">
+                <div style="font-size:13px;color:#6580ab;margin-bottom:10px">{{ t.equipped }}</div>
+                <div style="display:flex;flex-wrap:wrap;gap:8px">
+                  <sc-for list="{{ skills }}" as="k" hint-placeholder-count="6">
+                    <span style="border:2px solid #6580ab;padding:6px 10px;font-size:13px;color:#fffeff">{{ k }}</span>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isGames }}" hint-placeholder-val="{{ false }}">
+            <div style="display:grid;gap:14px">
+              <sc-for list="{{ games }}" as="g" hint-placeholder-count="1">
+                <div style="border:2px solid #6580ab;background:#001c4f;padding:16px;display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:start">
+                  <div style="border:2px solid #6580ab;height:112px;background:repeating-linear-gradient(45deg,#0b2f6b 0 6px,#0a2557 6px 12px);display:flex;align-items:flex-end;justify-content:center;padding:5px;overflow:hidden;position:relative">
+                    <span style="font-family:monospace;font-size:10px;color:#c9d2e9;background:#002566;padding:2px 4px">cover</span>
+                    <img src="{{ g.cover }}" alt="{{ g.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:{{ g.coverDisplay }}" />
+                  </div>
+                  <div>
+                    <div style="font-size:19px;color:#fffeff">{{ g.name }}</div>
+                    <div style="margin-top:12px;display:grid;gap:6px;font-size:13px">
+                      <div style="display:flex;gap:8px"><span style="color:#6580ab;min-width:104px">{{ t.genre }}</span><span style="color:#fffeff">{{ g.genre }}</span></div>
+                      <div style="display:flex;gap:8px"><span style="color:#6580ab;min-width:104px">{{ t.platform }}</span><span style="color:#fffeff">{{ g.platform }}</span></div>
+                      <div style="display:flex;gap:8px"><span style="color:#6580ab;min-width:104px">{{ t.released }}</span><span style="color:#fffeff">{{ g.published }}</span></div>
+                    </div>
+                    <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:10px">
+                      <a href="{{ g.game_page }}" target="_blank" style="border:2px solid #c9d2e9;background:#ae0002;color:#fffeff;padding:8px 14px;font-size:13px" style-hover="{{ redHover }}">{{ t.playBtn }}</a>
+                      <a href="{{ g.source_code }}" target="_blank" style="border:2px solid #6580ab;color:#c9d2e9;padding:8px 14px;font-size:13px;opacity:{{ g.srcOpacity }}" style-hover="{{ ghostHover }}">{{ t.sourceBtn }}</a>
+                    </div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isCode }}" hint-placeholder-val="{{ false }}">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px">
+              <sc-for list="{{ projects }}" as="p" hint-placeholder-count="2">
+                <a href="{{ p.link }}" target="_blank" style="display:block;border:2px solid #6580ab;background:#001c4f;padding:16px" style-hover="{{ cardHover }}">
+                  <div style="display:flex;align-items:center;gap:10px">
+                    <span style="width:16px;height:13px;background:#c9d2e9;border:2px solid #6580ab;display:inline-block"></span>
+                    <span style="font-size:17px;color:#fffeff">{{ p.name }}</span>
+                  </div>
+                  <p style="margin:12px 0 0;font-size:13px;line-height:1.7;color:#c9d2e9;white-space:pre-line">{{ p.description }}</p>
+                  <div style="margin-top:14px;font-size:12px;color:#ae0002">{{ t.openRepo }}</div>
+                </a>
+              </sc-for>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isContact }}" hint-placeholder-val="{{ false }}">
+            <div style="display:grid;gap:20px">
+              <p style="margin:0;font-size:15px;line-height:1.8;color:#fffeff">{{ t.contactIntro }}</p>
+              <div style="display:grid;gap:8px">
+                <sc-for list="{{ contacts }}" as="c" hint-placeholder-count="4">
+                  <a href="{{ c.url }}" target="_blank" style="display:flex;align-items:center;gap:14px;border:2px solid #6580ab;background:#001c4f;padding:13px 14px" style-hover="{{ cardHover }}">
+                    <span style="width:10px;height:10px;background:#ae0002;display:inline-block"></span>
+                    <span style="font-size:15px;color:#fffeff;min-width:120px">{{ c.label }}</span>
+                    <span style="font-size:13px;color:#6580ab">{{ c.handle }}</span>
+                  </a>
+                </sc-for>
+              </div>
+              <div style="border:2px solid #ae0002;background:#001c4f;padding:14px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">
+                <span style="font-size:14px;color:#c9d2e9">{{ t.donateText }}</span>
+                <a href="https://ko-fi.com/bluemoon_coder" target="_blank" style="border:2px solid #c9d2e9;background:#ae0002;color:#fffeff;padding:9px 16px;font-size:13px" style-hover="{{ redHover }}">{{ t.donateBtn }}</a>
+              </div>
+            </div>
+          </sc-if>
+
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12px;color:#6580ab">
+      <span>{{ t.keyHint }}<span style="animation:blink 1s steps(1,end) infinite;color:#ae0002">&#9608;</span></span>
+      <span>&#169; 2026 Luca Mastroianni &#183; bluemoon.moe</span>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;lang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;en&quot;,&quot;it&quot;],&quot;default&quot;:&quot;en&quot;,&quot;tsType&quot;:&quot;\&quot;en\&quot;|\&quot;it\&quot;&quot;}}">
+const STR = {
+  en: {
+    tagline: "Indie game developer / press start",
+    classLabel: "CLASS", className: "Game Dev", jobLabel: "SUBCLASS", jobName: "Juris Doctor",
+    menu: ["BIO", "GAMES", "CODE", "CONTACT"],
+    help: [
+      "Discover something about me.",
+      "Games I have released as an individual game developer. Enjoy!",
+      "Coding projects that are not released games themselves.",
+      "Ways to reach me. I usually answer within a day."
+    ],
+    titles: ["STATUS", "GAME LIBRARY", "CODE VAULT", "CONTACT"],
+    bio1a: "Hi! I'm Luca Mastroianni \u2014 also known online as ",
+    bio1b: " \u2014 a self-taught developer from Italy and the creator behind ",
+    bio1c: ".",
+    bio2a: "I build indie games, plugins and digital tools, bringing together my passion for videogames, computer science and the legal side of technology, with a particular interest in ",
+    bio2b: "FinTech and Intellectual Property",
+    bio2c: ".",
+    equipped: "EQUIPPED SKILLS",
+    stats: [
+      ["PROGRAMMING", 82, "Code, architecture & debugging"],
+      ["GAME DESIGN", 76, "Systems, mechanics & narrative"],
+      ["TOOLMAKING", 88, "Plugins, editors & game tools"],
+      ["LAW / IP", 84, "Games, technology & intellectual property"]
+    ],
+    genre: "GENRE", platform: "PLATFORM", released: "RELEASED",
+    playBtn: "PLAY GAME", sourceBtn: "SOURCE", openRepo: "OPEN REPOSITORY \u25B8",
+    contactIntro: "Choose a channel to send your message. Collaborations, freelance work and plain hellos are all welcome.",
+    donateText: "Enjoyed something I made? A coffee helps the next build.",
+    donateBtn: "KO-FI",
+    keyHint: "\u2191 \u2193 move  \u00B7  or just click ",
+    meta: (total) => total + " entries"
+  },
+  it: {
+    tagline: "Sviluppatore di videogiochi indie / premi start",
+    classLabel: "CLASSE", className: "Game Dev", jobLabel: "SOTTOCLASSE", jobName: "Juris Doctor",
+    menu: ["BIO", "GIOCHI", "CODICE", "CONTATTI"],
+    help: [
+      "Scopri qualcosa su di me.",
+      "I giochi che ho pubblicato come sviluppatore indipendente. Buon divertimento!",
+      "Progetti di codice che non sono giochi veri e propri.",
+      "Come contattarmi. Di solito rispondo entro un giorno."
+    ],
+    titles: ["STATUS", "LUDOTECA", "ARCHIVIO CODICE", "CONTATTI"],
+    bio1a: "Ciao! Sono Luca Mastroianni \u2014 online conosciuto anche come ",
+    bio1b: " \u2014 sviluppatore autodidatta italiano e autore di ",
+    bio1c: ".",
+    bio2a: "Creo giochi indie, plugin e strumenti digitali, unendo la mia passione per i videogiochi, l'informatica e il lato giuridico della tecnologia, con un interesse particolare per ",
+    bio2b: "FinTech e Propriet\u00E0 Intellettuale",
+    bio2c: ".",
+    equipped: "ABILIT\u00C0 EQUIPAGGIATE",
+    stats: [
+      ["PROGRAMMAZIONE", 82, "Codice, architettura e debug"],
+      ["GAME DESIGN", 76, "Sistemi, meccaniche e narrativa"],
+      ["TOOLMAKING", 88, "Plugin, editor e strumenti di sviluppo"],
+      ["DIRITTO / IP", 84, "Giochi, tecnologia e propriet\u00E0 intellettuale"]
+    ],
+    genre: "GENERE", platform: "PIATTAFORMA", released: "USCITA",
+    playBtn: "GIOCA", sourceBtn: "CODICE", openRepo: "APRI REPOSITORY \u25B8",
+    contactIntro: "Scegli un canale per scrivermi. Collaborazioni, lavori freelance e semplici saluti sono sempre benvenuti.",
+    donateText: "Ti \u00E8 piaciuto qualcosa che ho fatto? Un caff\u00E8 aiuta il prossimo progetto.",
+    donateBtn: "KO-FI",
+    keyHint: "\u2191 \u2193 muovi  \u00B7  o clicca ",
+    meta: (total) => total + " voci"
+  }
+};
+
+// Fallback used if content.json can't be fetched (e.g. opened straight from disk).
+const FALLBACK = {
+  games: [{
+    name: "Hide And Seek", genre: { en: "Puzzle", it: "Puzzle" }, platform: "Web",
+    published: { en: "08 November 2019", it: "08 Novembre 2019" },
+    game_page: "https://bluemooncoder.itch.io/hide-and-seek",
+    source_code: "https://github.com/BlueMoon968/Hide-And-Seek"
+  }],
+  code: [
+    { name: "MV Plugins", link: "https://github.com/BlueMoon968/MV-Plugins",
+      description: { en: "Some old RPG Maker MV plugins\nmade as coding exercises.", it: "Vecchi plugin per RPG Maker MV\nscritti come esercizi di codice." } },
+    { name: "GBDK Rand", link: "https://github.com/BlueMoon968/gbdk_rand",
+      description: { en: "This is an addon for GBDK.\nIt makes a better random number generator.", it: "Un addon per GBDK.\nFornisce un generatore di numeri casuali migliore." } }
+  ]
+};
+
+const CONTACTS = [
+  { label: "GitHub", handle: "@BlueMoon968", url: "https://github.com/BlueMoon968" },
+  { label: "itch.io", handle: "bluemooncoder.itch.io", url: "https://bluemooncoder.itch.io/" },
+  { label: "Twitter / X", handle: "@BlueMoon_Coder", url: "https://twitter.com/BlueMoon_Coder" },
+  { label: "E-mail", handle: "dev@bluemoon.moe", url: "mailto:dev@bluemoon.moe" }
+];
+
+const SKILLS = ["JAVASCRIPT", "GODOT", "RPG MAKER", "PIXIJS", "GLSL", "PLUGIN DEV"];
+
+class Component extends DCLogic {
+  state = { lang: "en", index: 0, content: FALLBACK };
+
+  componentDidMount() {
+    fetch("content.json")
+      .then(r => r.json())
+      .then(c => { if (c && c.games && c.code) this.setState({ content: c }); })
+      .catch(() => {});
+    this._key = (e) => {
+      const n = 4;
+      if (e.key === "ArrowDown") { e.preventDefault(); this.setState(s => ({ index: (s.index + 1) % n })); }
+      else if (e.key === "ArrowUp") { e.preventDefault(); this.setState(s => ({ index: (s.index + n - 1) % n })); }
+    };
+    window.addEventListener("keydown", this._key);
+  }
+  componentWillUnmount() { window.removeEventListener("keydown", this._key); }
+
+  age() {
+    const b = new Date("1996/07/25"), t = new Date();
+    let extra = 0;
+    if (t.getMonth() < b.getMonth() || (t.getMonth() === b.getMonth() && t.getDate() < b.getDate())) extra = 1;
+    return t.getFullYear() - b.getFullYear() - extra;
+  }
+
+  loc(v, lang) { return v && typeof v === "object" ? (v[lang] || v.en || "") : (v || ""); }
+
+  renderVals() {
+    const L = this.state.lang;
+    const t = STR[L];
+    const i = this.state.index;
+    const c = this.state.content || FALLBACK;
+    const langBtn = (on) => ({
+      border: "none", cursor: "pointer", padding: "9px 16px", fontFamily: "Silkscreen, monospace",
+      fontSize: "14px", background: on ? "#ae0002" : "transparent", color: on ? "#fffeff" : "#6580ab"
+    });
+    const games = (c.games || []).map(g => ({
+      name: g.name,
+      genre: this.loc(g.genre, L),
+      platform: this.loc(g.platform, L),
+      published: this.loc(g.published, L),
+      game_page: g.game_page,
+      source_code: g.source_code || g.game_page,
+      srcOpacity: g.source_code ? 1 : 0,
+      cover: g.cover || "",
+      coverDisplay: g.cover ? "block" : "none"
+    }));
+    const projects = (c.code || []).map(p => ({
+      name: p.name, link: p.link, description: this.loc(p.description, L)
+    }));
+    const totals = [0, games.length, projects.length, CONTACTS.length];
+
+    return {
+      t, lang: L, level: this.age(),
+      setEn: () => this.setState({ lang: "en" }),
+      setIt: () => this.setState({ lang: "it" }),
+      enBtnStyle: langBtn(L === "en"), itBtnStyle: langBtn(L === "it"),
+      langHover: { color: "#fffeff" },
+      redHover: { background: "#d10003" },
+      ghostHover: { borderColor: "#c9d2e9", color: "#fffeff" },
+      cardHover: { borderColor: "#c9d2e9" },
+      helpText: t.help[i],
+      panelTitle: t.titles[i],
+      panelMeta: i === 0 ? "" : t.meta(totals[i]),
+      menu: t.menu.map((label, k) => ({
+        label, arrow: k === i ? 1 : 0,
+        bg: k === i ? "#ae0002" : "transparent",
+        fg: k === i ? "#fffeff" : "#c9d2e9",
+        border: k === i ? "#c9d2e9" : "transparent",
+        onClick: () => this.setState({ index: k })
+      })),
+      isBio: i === 0, isGames: i === 1, isCode: i === 2, isContact: i === 3,
+      stats: t.stats.map(([label, v, note]) => ({ label, value: v + "/100", pct: v + "%", note })),
+      skills: SKILLS,
+      games, projects, contacts: CONTACTS
+    };
+  }
+}
+</script>
 </body>
 </html>

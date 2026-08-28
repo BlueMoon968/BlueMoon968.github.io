@@ -1,0 +1,31 @@
+{
+  "games": [
+    {
+      "name": "Hide And Seek",
+      "genre": { "en": "Puzzle", "it": "Puzzle" },
+      "platform": "Web",
+      "published": { "en": "08 November 2019", "it": "08 Novembre 2019" },
+      "cover": "https://img.itch.zone/aW1nLzI2NjM2NTUucG5n/315x250%23c/9jqqxe.png",
+      "game_page": "https://bluemooncoder.itch.io/hide-and-seek",
+      "source_code": "https://github.com/BlueMoon968/Hide-And-Seek"
+    }
+  ],
+  "code": [
+    {
+      "name": "MV Plugins",
+      "link": "https://github.com/BlueMoon968/MV-Plugins",
+      "description": {
+        "en": "Some old RPG Maker MV plugins\nmade as coding exercises.\nSome of them are really outdated.",
+        "it": "Vecchi plugin per RPG Maker MV\nscritti come esercizi di codice.\nAlcuni sono davvero datati."
+      }
+    },
+    {
+      "name": "GBDK Rand",
+      "link": "https://github.com/BlueMoon968/gbdk_rand",
+      "description": {
+        "en": "This is an addon for GBDK.\nIt makes a better random number\ngenerator.",
+        "it": "Un addon per GBDK.\nFornisce un generatore di numeri\ncasuali migliore."
+      }
+    }
+  ]
+}
